@@ -1,0 +1,148 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\ARMANDO\\Documents\\Proyectos personales\\Proyectos React\\DAAp-Defi\\contracts\\JamToken.sol": {
+      "lastModificationDate": 1717605879232,
+      "contentHash": "f2e2e90e4893bbce789de94a1810b303",
+      "sourceName": "contracts/JamToken.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "JamToken"
+      ]
+    },
+    "C:\\Users\\ARMANDO\\Documents\\Proyectos personales\\Proyectos React\\DAAp-Defi\\contracts\\TokenFarm.sol": {
+      "lastModificationDate": 1717606085516,
+      "contentHash": "f7a5cf7ed77cc3b16d9cc0c5fd6e4936",
+      "sourceName": "contracts/TokenFarm.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./JamToken.sol",
+        "./StellartToken.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "TokenFarm"
+      ]
+    },
+    "C:\\Users\\ARMANDO\\Documents\\Proyectos personales\\Proyectos React\\DAAp-Defi\\contracts\\StellartToken.sol": {
+      "lastModificationDate": 1717606054974,
+      "contentHash": "96338e6cce736c2d4c2e9e7c746914fd",
+      "sourceName": "contracts/StellartToken.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "StellartToken"
+      ]
+    },
+    "C:\\Users\\ARMANDO\\Documents\\Proyectos personales\\Proyectos React\\DAAp-Defi\\contracts\\Migrations.sol": {
+      "lastModificationDate": 1717600519752,
+      "contentHash": "7c7ba25207a9d0e07874874f9f6c626b",
+      "sourceName": "contracts/Migrations.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "Migrations"
+      ]
+    }
+  }
+}
