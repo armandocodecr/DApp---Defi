@@ -15,7 +15,7 @@ module.exports = {
       network_id: "*", // cualquier id de red
     },
     sepolia: {
-      url: 'https://sepolia.infura.io/v3/273723e027b54226b92c0187d333f329',
+      url: `https://sepolia.infura.io/v3/${process.env.INFURUA_SEPOLIA_ID}`,
       network: "11155111",
       accounts: [privateKey]
     },
