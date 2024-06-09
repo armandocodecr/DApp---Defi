@@ -32,13 +32,14 @@ async function main() {
   console.log('Transferred 1M StellartTokens to TokenFarm');
 
   // Transferir JamTokens a la cuenta de MetaMask
-  const metamaskAddress = '0xa14C5017c5b3d5b03A96d94e07A3B200D6085085'; // Reemplaza con la dirección de tu cuenta de MetaMask
-  await jamToken.transfer(metamaskAddress, ethers.utils.parseUnits('10000', 18));
-  console.log(`Transferred 100 JamTokens to account: ${metamaskAddress}`);
+  //const metamaskAddress = '0xa14C5017c5b3d5b03A96d94e07A3B200D6085085'; // Reemplaza con la dirección de tu cuenta de MetaMask
+  const userAddress = deployer.address;
+  await jamToken.transfer(userAddress, ethers.utils.parseUnits('10000', 18));
+  console.log(`Transferred 100 JamTokens to account: ${userAddress}`);
 
   // Verificar balance
-  const balance = await jamToken.balanceOf(metamaskAddress);
-  console.log(`Balance of ${metamaskAddress}: ${ethers.utils.formatUnits(balance, 18)} JAM`);
+  const balance = await jamToken.balanceOf(userAddress);
+  console.log(`Balance of ${userAddress}: ${ethers.utils.formatUnits(balance, 18)} JAM`);
 
   // Guardar las direcciones del contrato en un archivo JSON
   const addresses = {
