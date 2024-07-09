@@ -3,17 +3,14 @@ pragma solidity ^0.8.4;
 import "./JamToken.sol";
 import "./StellartToken.sol";
 
-// Owner: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-// Usuario: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
-
 contract TokenFarm {
-    // Declaraciones iniciales
+    // Initial declarations
     string public name = "Stellart Token Farm";
     address public owner;
     JamToken public jamToken;
     StellartToken public stellarToken;
 
-    // Estructura de datos
+    // Data structure
     address [] public stakers;
     mapping(address => uint) public stakingBalance;
     mapping(address => bool) public hasStaked;
@@ -25,43 +22,43 @@ contract TokenFarm {
         owner = msg.sender;
     }
 
-    // Stake de tokens
+    // Staking tokens
     function stakeTokens(uint _amount) public {
-        // Se require una cantidad superior a cero
-        require(_amount > 0, "La cantidad no puede ser menor a 0");
-        // Transferir tokens JAM al smart contract principal
+        // Require an amount greater than zero
+        require(_amount > 0, "Amount cannot be less than 0");
+        // Transfer JAM tokens to the main smart contract
         jamToken.transferFrom((msg.sender), address(this), _amount);
-        // Actualizar el saldo del staking
+        // Update the staking balance
         stakingBalance[msg.sender] += _amount;
-        // Guardar el staker
+        // Save the staker
         if(!hasStaked[msg.sender]){
             stakers.push(msg.sender);
         }
 
-        // Actualizar el estado del staking
+        // Update the staking status
         isStaking[msg.sender] = true;
         hasStaked[msg.sender] = true;
     }
 
-    // Quitar el staking de los tokens
+    // Unstake tokens
     function unstakeTokens() public {
-        // Saldo del staking de un usuario
+        // Staking balance of a user
         uint balance = stakingBalance[msg.sender];
-        // Se require una cantidad superior a 0
-        require(balance > 0, "El balance staking es 0");
-        // Transferencia de los tokens al usuario
+        // Require a balance greater than 0
+        require(balance > 0, "Staking balance is 0");
+        // Transfer tokens back to the user
         jamToken.transfer(msg.sender, balance);
-        // Resetea el balance de staking del usuario
+        // Reset the user's staking balance
         stakingBalance[msg.sender] = 0;
-        // Actualizar el estado del staking
+        // Update the staking status
         isStaking[msg.sender] = false;
     }
 
-    // Emision de Tokens (recompensas)
+    // Issuing tokens (rewards)
     function issuesTokens() public{
-        // Unicamente ejecutable por el owner
-        require(msg.sender == owner, "No eres el owner");
-        // Emitir tokens a todos los stakers
+        // Only executable by the owner
+        require(msg.sender == owner, "You are not the owner");
+        // Issue tokens to all stakers
         for(uint i=0; i < stakers.length; i++){
             address recipient = stakers[i];
             uint balance = stakingBalance[recipient];
@@ -69,7 +66,5 @@ contract TokenFarm {
                 stellarToken.transfer(recipient, balance);
             }
         }
-
     }
-
 }

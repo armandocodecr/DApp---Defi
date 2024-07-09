@@ -1,40 +1,37 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-// Persona 1. (owner) = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-// Persona 2. (Receptor) = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
-// Persona 3. (Operador) = 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
 contract JamToken {
-    // Declaraciones
+    // Declarations
     string public name = "JAM Token";
     string public symbol = "JAM";
     uint256 public totalSupply = 1000000000000000000000000;
     uint8 public decimals = 18;
 
-    // Eventos para la transferencia de tokens de un usuario
+    // Events for token transfer between users
     event Transfer (
         address indexed _from,
         address indexed _to,
         uint256 _value
     );
 
-    // Evento para la aprobacion de un operador
+    // Event for operator approval
     event Approval (
         address indexed _owner,
         address indexed _spender,
         uint256 value
     );
 
-    // Estructura de datos
-    mapping(address => uint256) public balanceOf; // Obtener el balance de una persona
-    mapping(address => mapping(address => uint)) public allowance; // Cantidad que permitemos que un spender gestione sobre nuestros tokens
+    // Data structure
+    mapping(address => uint256) public balanceOf; // Get the balance of an address
+    mapping(address => mapping(address => uint)) public allowance; // Amount allowed for a spender to manage on behalf of the owner
 
     // Constructor
     constructor(){
-        balanceOf[msg.sender] = totalSupply; // Cuando se despliega el contrato el balance total se irá directamente al msg.sender
+        balanceOf[msg.sender] = totalSupply; // When the contract is deployed, the total supply goes to the msg.sender
     }
 
-    // Transferencia de tokens de un usuario
+    // Token transfer between users
     function transfer(address _to, uint256 _value) public returns (bool success){
         require(balanceOf[msg.sender] >= _value);
         balanceOf[msg.sender] -= _value;
@@ -43,19 +40,18 @@ contract JamToken {
         return true;
     }
 
-    // Aprobacion de una cantidad para ser gastada por un operador
+    // Approval of an amount to be spent by an operator
     function approve(address _spender, uint256 _value) public returns (bool success){
-        allowance[msg.sender][_spender] = _value; // [msg.sender] -> dueño de los tokens | [_spender] -> persona a la que se le da permisos de usarlos
+        allowance[msg.sender][_spender] = _value; // [msg.sender] -> token owner | [_spender] -> person allowed to spend the tokens
         emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
-    // Transferencia de Tokens especificando el emisor
-    // Owner (20 tokens) -> Operador (5 tokens) = 15 tokens
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){ // Nos permite enviar tokens de otra persona si tenemos permisos
-        require(_value <= balanceOf[_from]); // Comprobamos que el balance de la persona que envia tenga dicha cantidad disponible para hacerlo
-        require(_value <= allowance[_from][msg.sender]); // Compruebo que los tokens del emisor (_from -> dueño) hayan sido emitidos correctamente a la 
-        // persona que está enviando dichos tokens (msg.sender)
+    // Token transfer specifying the sender
+    // Owner (20 tokens) -> Operator (5 tokens) = 15 tokens
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){ // Allows transferring tokens on behalf of another person if approved
+        require(_value <= balanceOf[_from]); // Check if the sender has enough balance
+        require(_value <= allowance[_from][msg.sender]); // Check if the tokens have been approved correctly for the sender (msg.sender)
 
         balanceOf[_from] -= _value;
         balanceOf[_to] += _value;
@@ -63,5 +59,4 @@ contract JamToken {
         emit Transfer(_from, _to, _value);
         return true;
     }
-
 }
